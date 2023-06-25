@@ -1,6 +1,6 @@
 {
     "name": "bios-info",
-    "version": "0.0.0",
+    "version": "1.0.0",
     "description": "Library for extracting data from UEFI BIOS dumps (currently only the Windows product key).",
     "bugs": "https://github.com/baltpeter/bios-info/issues",
     "repository": {
