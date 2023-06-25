@@ -6,6 +6,8 @@
 
 Currently, `bios-info` provides a single function (`findWindowsProductKeys()`) that can extract Windows 8+ product key from a BIOS dump. Whereas for previous Windows versions, the Windows product key on OEM systems was provided on a COA sticker, since Windows 8, it is typically stored in the [MSDM ACPI table in the BIOS/UEFI](https://dellwindowsreinstallationguide.com/the-oem-product-key-and-oem-system-locked-preinstallation/). It does so based on a [specific marker](https://vlab.su/viewtopic.php?f=35&t=30952) ([`010000000000000001000000000000001d000000`](https://www.alisaler.com/find-windows-key-from-bios-bin-file/)) that should indicate where the product key is stored in the BIOS. As a fallback, it also uses a regular expression to find anything that looks like a product key in the dump.
 
+You can use this online through my [CyberChef instance](https://cyberchef.bn.al/#recipe=Extract_Windows_product_keys_from_BIOS_dump()).
+
 ## Installation
 
 You can install bios-info using yarn or npm:
