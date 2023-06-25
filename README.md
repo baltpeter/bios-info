@@ -1,8 +1,10 @@
 # bios-info
 
-> Library for extracting data from UEFI BIOS dumps.
+> Library for extracting data from UEFI BIOS dumps (currently only the Windows product key).
 
-<!-- TODO: A longer introduction to the module. -->
+`bios-info` is a TypeScript library to extract data from UEFI BIOS dumps.
+
+Currently, `bios-info` provides a single function (`findWindowsProductKeys()`) that can extract Windows 8+ product key from a BIOS dump. Whereas for previous Windows versions, the Windows product key on OEM systems was provided on a COA sticker, since Windows 8, it is typically stored in the [MSDM ACPI table in the BIOS/UEFI](https://dellwindowsreinstallationguide.com/the-oem-product-key-and-oem-system-locked-preinstallation/). It does so based on a [specific marker](https://vlab.su/viewtopic.php?f=35&t=30952) ([`010000000000000001000000000000001d000000`](https://www.alisaler.com/find-windows-key-from-bios-bin-file/)) that should indicate where the product key is stored in the BIOS. As a fallback, it also uses a regular expression to find anything that looks like a product key in the dump.
 
 ## Installation
 
@@ -17,15 +19,22 @@ yarn add bios-info
 
 A full API reference can be found in the [`docs` folder](/docs/README.md).
 
-<!--
 ## Example usage
 
-TODO: Describe the usage example(s).
+Here is an example of how to use this library in TypeScript:
 
 ```ts
-// TODO: Example code.
+import { readFile } from 'fs/promises';
+import { findWindowsProductKeys } from 'bios-info';
+
+(async () => {
+    const biosBuffer = await readFile('bios.bin');
+    const keys = findWindowsProductKeys(biosBuffer);
+
+    console.log(keys);
+    // [ '3V66T-NKG7Y-8B7W4-X2WWD-8QK9K' ]
+})();
 ```
--->
 
 ## License
 
